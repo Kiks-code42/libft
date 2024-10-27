@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strnstr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: killianmolliex <killianmolliex@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 17:15:38 by kmolliex          #+#    #+#             */
-/*   Updated: 2024/10/14 11:47:24 by killianmoll      ###   ########.fr       */
+/*   Created: 2024/10/17 14:28:48 by killianmoll       #+#    #+#             */
+/*   Updated: 2024/10/17 14:51:28 by killianmoll      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+char	*ft_strnstr(const char *zone, const char *cible, size_t len)
 {
-	unsigned char	*temp_dst;
-	unsigned char	*temp_src;
+	size_t	i;
+	size_t	j;
 
-	if (dst == NULL && src == NULL)
-		return (dst);
-	temp_dst = (unsigned char *) dst;
-	temp_src = (unsigned char *) src;
-	while (n > 0)
+	if (cible[0] == '\0')
+		return ((char *)zone);
+	i = 0;
+	while ((zone[i] && i < len))
 	{
-		*(temp_dst++) = *(temp_src++);
-		n--;
+		j = 0;
+		while ((cible[j] == zone[i + j] && (i + j) < len))
+		{
+			if (cible[j + 1] == '\0')
+				return (&((char *)zone)[i]);
+			j++;
+		}
+		i++;
 	}
-	return (dst);
+	return (NULL);
 }

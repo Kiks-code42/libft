@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: killianmolliex <killianmolliex@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 17:15:38 by kmolliex          #+#    #+#             */
-/*   Updated: 2024/10/14 11:47:24 by killianmoll      ###   ########.fr       */
+/*   Created: 2024/10/21 14:08:51 by killianmoll       #+#    #+#             */
+/*   Updated: 2024/10/21 14:08:57 by killianmoll      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int	ft_atoi(const char *str)
 {
-	unsigned char	*temp_dst;
-	unsigned char	*temp_src;
+	int	sign;
+	int	result;
 
-	if (dst == NULL && src == NULL)
-		return (dst);
-	temp_dst = (unsigned char *) dst;
-	temp_src = (unsigned char *) src;
-	while (n > 0)
+	result = 0;
+	sign = 1;
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+		str++;
+	if (*str == '-')
+		sign *= -1;
+	if (*str == '+' || *str == '-')
+		str++;
+	while (*str >= '0' && *str <= '9')
 	{
-		*(temp_dst++) = *(temp_src++);
-		n--;
+		result = result * 10 + (*str - '0');
+		str++;
 	}
-	return (dst);
+	return (sign * result);
 }

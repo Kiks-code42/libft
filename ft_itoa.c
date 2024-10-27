@@ -1,30 +1,57 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: killianmolliex <killianmolliex@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/10 17:15:38 by kmolliex          #+#    #+#             */
-/*   Updated: 2024/10/14 11:47:24 by killianmoll      ###   ########.fr       */
+/*   Created: 2024/10/27 19:39:01 by killianmoll       #+#    #+#             */
+/*   Updated: 2024/10/27 19:39:29 by killianmoll      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+int	ft_nb(int nb)
 {
-	unsigned char	*temp_dst;
-	unsigned char	*temp_src;
+	int	i;
 
-	if (dst == NULL && src == NULL)
-		return (dst);
-	temp_dst = (unsigned char *) dst;
-	temp_src = (unsigned char *) src;
-	while (n > 0)
+	i = 0;
+	if (nb <= 0)
+		i++;
+	while (nb)
 	{
-		*(temp_dst++) = *(temp_src++);
-		n--;
+		nb = nb / 10;
+		i++;
 	}
-	return (dst);
+	return (i);
+}
+
+char	*ft_itoa(int nb)
+{
+	int		i;
+	char	*str;
+	long	n;
+
+	n = nb;
+	i = ft_nb(n);
+	str = malloc(sizeof(char) * i + 1);
+	if (!str)
+		return (NULL);
+	if (n < 0)
+	{
+		str[0] = '-';
+		n = -n;
+	}
+	if (n == 0)
+		str[0] = '0';
+	str[i] = '\0';
+	i--;
+	while (n)
+	{
+		str[i] = n % 10 + '0';
+		i--;
+		n = n / 10;
+	}
+	return (str);
 }
