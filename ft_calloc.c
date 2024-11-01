@@ -6,7 +6,7 @@
 /*   By: killianmolliex <killianmolliex@student.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 14:17:03 by killianmoll       #+#    #+#             */
-/*   Updated: 2024/10/21 14:26:03 by killianmoll      ###   ########.fr       */
+/*   Updated: 2024/10/30 21:58:13 by killianmoll      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@ void	*ft_calloc(size_t count, size_t size)
 	if (!tmp)
 		return (NULL);
 	while (i < count * size)
-		tmp[i++] = 0;
+	{
+		tmp[i] = 0;
+		i++;
+	}
 	return (tmp);
 }
